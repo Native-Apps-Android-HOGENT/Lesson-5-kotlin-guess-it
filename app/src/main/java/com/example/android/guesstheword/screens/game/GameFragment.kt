@@ -43,7 +43,7 @@ class GameFragment : Fragment() {
 
         // Get the viewmodel
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
-        
+
         viewModel.score.observe(this, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
         })
