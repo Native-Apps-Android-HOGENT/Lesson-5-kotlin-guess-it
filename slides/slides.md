@@ -30,3 +30,10 @@ var score = 0
 private lateinit var wordList: MutableList<String>
 
 ```
+
+# Null safety
+
+##
+
+# Where should the livedata be initalized
+
