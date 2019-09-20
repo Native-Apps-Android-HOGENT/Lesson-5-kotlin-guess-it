@@ -58,6 +58,8 @@ class GameFragment : Fragment() {
             viewModel.onSkip()
         }
 
+
+
         /** Setting up LiveData observation relationship **/
         viewModel.word.observe(this, Observer { newWord ->
             binding.wordText.text = newWord
@@ -71,6 +73,13 @@ class GameFragment : Fragment() {
         // performs the code in gameFinished()
         // Make sure to call onGameFinishCompete to tell your viewmodel that the game finish event
         // was dealt with
+
+        viewModel.eventGameFinish.observe(this, Observer { finish ->
+            if(finish){
+                gameFinished()
+                viewModel.onGameFinishComplete()
+            }
+        })
 
         return binding.root
 
