@@ -37,3 +37,10 @@ private lateinit var wordList: MutableList<String>
 
 # Where should the livedata be initalized
 
+# Backing property
+
+# Companion Objects
+
+# Object code kotlin
+
+
