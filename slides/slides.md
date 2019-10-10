@@ -161,6 +161,62 @@ Thanks to that, we can always replace accessors default implementation with a cu
 
 # Companion Objects
 
+##
+If you need a function or a property to be tied to a class rather than to instances
+ of it (similar to `static`), you can declare it inside a companion object
+
+##
+
+````kotlin
+companion object {
+    // These represent different important times in the game, such as game length.
+
+    // This is when the game is over
+    private const val DONE = 0L
+
+    // This is the time when the phone will start buzzing each second
+    private const val COUNTDOWN_PANIC_SECONDS = 10L
+
+    // This is the number of milliseconds in a second
+    private const val ONE_SECOND = 1000L
+
+    // This is the total time of the game
+    private const val COUNTDOWN_TIME = 60000L
+
+}
+````
+
+
 # Object code kotlin
+
+##
+By using an object expression, you can now define an anonymous,
+unnamed class and at the same time create one instance of it, called an anonymous object.
+
+##
+````kotlin
+timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                _currentTime.value = (millisUntilFinished / ONE_SECOND)
+                if (millisUntilFinished / ONE_SECOND <= COUNTDOWN_PANIC_SECONDS) {
+                    _eventBuzz.value = BuzzType.COUNTDOWN_PANIC
+                }
+            }
+
+            override fun onFinish() {
+                _currentTime.value = DONE
+                _eventBuzz.value = BuzzType.GAME_OVER
+                _eventGameFinish.value = true
+            }
+        }
+````
+
+# Expand
+
+## Ex. 2
+
+Change the architecture of the Navigation Lesson to a MVVM architecture. 
+
 
 
