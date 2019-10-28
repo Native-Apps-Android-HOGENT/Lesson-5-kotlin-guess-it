@@ -27,6 +27,7 @@ import androidx.core.content.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
@@ -60,7 +61,7 @@ class GameFragment : Fragment() {
 
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         // Sets up event listening to navigate the player when the game is finished
         viewModel.eventGameFinish.observe(this, Observer { isFinished ->

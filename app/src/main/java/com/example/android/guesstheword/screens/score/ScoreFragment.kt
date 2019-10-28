@@ -54,14 +54,13 @@ class ScoreFragment : Fragment() {
         val scoreFragmentArgs by navArgs<ScoreFragmentArgs>()
 
         viewModelFactory = ScoreViewModelFactory(scoreFragmentArgs.score)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ScoreViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ScoreViewModel::class.java)
 
         binding.scoreViewModel = viewModel
 
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         // Navigates back to title when button is pressed
         viewModel.eventPlayAgain.observe(this, Observer { playAgain ->

@@ -66,7 +66,7 @@ class GameViewModel : ViewModel() {
         get() = _currentTime
 
     // The String version of the current time
-    val currentTimeString = Transformations.map(currentTime) { time ->
+    val currentTimeString: LiveData<String> = Transformations.map(currentTime) { time ->
         DateUtils.formatElapsedTime(time)
     }
 
@@ -80,7 +80,6 @@ class GameViewModel : ViewModel() {
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int>
         get() = _score
-
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
