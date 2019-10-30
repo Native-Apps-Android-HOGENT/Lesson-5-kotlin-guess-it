@@ -11,7 +11,7 @@ class WordRepository(context: Context) {
     private val wordDatabase = WordDatabase.getInstance(context)
     private val wordDao: WordDao = wordDatabase.wordDao
 
-    fun getAllWords() = wordDao.getAllWords()
+    suspend fun getAllWords() = wordDao.getAllWords()
 
     suspend fun insert(word: Word) = wordDao.insert(word)
 }

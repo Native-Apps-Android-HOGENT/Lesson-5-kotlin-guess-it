@@ -5,6 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.android.guesstheword.domain.Word
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 @Database(entities = [Word::class], version = 1, exportSchema = false)
 abstract class WordDatabase : RoomDatabase() {
@@ -26,9 +31,43 @@ abstract class WordDatabase : RoomDatabase() {
                     )
                             .fallbackToDestructiveMigration()
                             .build()
+                    instance.populateInitialData()
                     INSTANCE = instance
                 }
                 return instance
+            }
+        }
+
+    }
+
+    private fun populateInitialData() {
+        val wordList = mutableListOf(
+                "queen",
+                "hospital",
+                "basketball",
+                "cat",
+                "change",
+                "snail",
+                "soup",
+                "calendar",
+                "sad",
+                "desk",
+                "guitar",
+                "home",
+                "railway",
+                "zebra",
+                "jelly",
+                "car",
+                "crow",
+                "trade",
+                "bag",
+                "roll",
+                "bubble"
+        )
+        GlobalScope.launch {
+            withContext(Dispatchers.IO) {
+                wordList.map { Word(it) }
+                        .map { wordDao.insert(it) }
             }
         }
     }

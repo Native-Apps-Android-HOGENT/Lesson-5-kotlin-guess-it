@@ -18,10 +18,12 @@ package com.example.android.guesstheword.screens.game
 
 import android.os.CountDownTimer
 import android.text.format.DateUtils
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.android.guesstheword.domain.Word
+import com.example.android.guesstheword.domain.WordRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private val CORRECT_BUZZ_PATTERN = longArrayOf(100, 100, 100, 100, 100, 100)
 private val PANIC_BUZZ_PATTERN = longArrayOf(0, 200)
@@ -31,7 +33,7 @@ private val NO_BUZZ_PATTERN = longArrayOf(0)
 /**
  * ViewModel containing all the logic needed to run the game
  */
-class GameViewModel : ViewModel() {
+class GameViewModel(private val wordRepository: WordRepository) : ViewModel() {
 
     // These are the three different types of buzzing in the game. Buzz pattern is the number of
     // milliseconds each interval of buzzing and non-buzzing takes.
@@ -71,8 +73,8 @@ class GameViewModel : ViewModel() {
     }
 
     // The current word
-    private val _word = MutableLiveData<String>()
-    val word: LiveData<String>
+    private val _word = MutableLiveData<Word>()
+    val word: LiveData<Word>
         get() = _word
 
 
@@ -82,7 +84,7 @@ class GameViewModel : ViewModel() {
         get() = _score
 
     // The list of words - the front of the list is the next word to guess
-    private lateinit var wordList: MutableList<String>
+    private lateinit var wordList: MutableList<Word>
 
     // Event which triggers the end of the game
     private val _eventGameFinish = MutableLiveData<Boolean>()
@@ -95,8 +97,9 @@ class GameViewModel : ViewModel() {
         get() = _eventBuzz
 
     init {
-        resetList()
-        nextWord()
+        viewModelScope.launch {
+            initialiseWords()
+        }
         _score.value = 0
 
         // Creates a timer which triggers the end of the game when it finishes
@@ -119,40 +122,29 @@ class GameViewModel : ViewModel() {
         timer.start()
     }
 
+    private suspend fun initialiseWords() {
+        resetList()
+        nextWord()
+    }
+
     /**
      * Resets the list of words and randomizes the order
      */
-    private fun resetList() {
-        wordList = mutableListOf(
-                "queen",
-                "hospital",
-                "basketball",
-                "cat",
-                "change",
-                "snail",
-                "soup",
-                "calendar",
-                "sad",
-                "desk",
-                "guitar",
-                "home",
-                "railway",
-                "zebra",
-                "jelly",
-                "car",
-                "crow",
-                "trade",
-                "bag",
-                "roll",
-                "bubble"
-        )
-        wordList.shuffle()
+    private suspend fun resetList() {
+        withContext(Dispatchers.IO) {
+            wordList = wordRepository.getAllWords().toMutableList()
+        }
+        // Shuffling a (very large) list could also take more than 16 ms so we also do this async
+        // It is however not an IO operation so we use the default dispatcher.
+        withContext(Dispatchers.Default) {
+            wordList.shuffle()
+        }
     }
 
     /**
      * Moves to the next word in the list
      */
-    private fun nextWord() {
+    private suspend fun nextWord() {
         //Select and remove a word from the list
         if (wordList.isEmpty()) {
             resetList()
@@ -164,13 +156,13 @@ class GameViewModel : ViewModel() {
 
     fun onSkip() {
         _score.value = (_score.value)?.minus(1)
-        nextWord()
+        viewModelScope.launch { nextWord() }
     }
 
     fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
         _eventBuzz.value = BuzzType.CORRECT
-        nextWord()
+        viewModelScope.launch { nextWord() }
     }
 
     /** Methods for completed events **/

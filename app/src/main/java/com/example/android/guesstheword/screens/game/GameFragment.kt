@@ -31,6 +31,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
+import com.example.android.guesstheword.domain.WordRepository
 
 /**
  * Fragment where the game is played
@@ -53,7 +54,8 @@ class GameFragment : Fragment() {
         )
 
         // Get the viewmodel
-        viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+        val viewModelFactory = GameViewModelFactory(WordRepository(requireContext()))
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
 
         // Set the viewmodel for databinding - this allows the bound layout access to all of the
         // data in the VieWModel
