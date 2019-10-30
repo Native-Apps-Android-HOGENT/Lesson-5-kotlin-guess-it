@@ -10,7 +10,7 @@ import com.example.android.guesstheword.domain.Word
 interface WordDao {
 
     @Insert
-    fun insert(word: Word)
+    suspend fun insert(word: Word)
 
     @Query("SELECT * FROM word_table")
     fun getAllWords(): LiveData<List<Word>>

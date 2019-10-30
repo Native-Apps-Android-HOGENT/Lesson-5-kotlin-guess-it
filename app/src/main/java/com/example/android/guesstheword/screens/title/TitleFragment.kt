@@ -22,20 +22,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.TitleFragmentBinding
+import com.example.android.guesstheword.domain.WordRepository
 
 /**
  * Fragment for the starting or title screen of the app
  */
 class TitleFragment : Fragment() {
 
+    private lateinit var binding: TitleFragmentBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        val binding: TitleFragmentBinding = DataBindingUtil.inflate(
-                inflater, R.layout.title_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.title_fragment, container, false)
+
+        val viewModelFactory = TitleViewModelFactory(WordRepository(requireContext()))
+        binding.titleViewModel = ViewModelProviders.of(this, viewModelFactory).get(TitleViewModel::class.java)
+        binding.lifecycleOwner = this
 
         binding.playGameButton.setOnClickListener {
             findNavController().navigate(TitleFragmentDirections.actionTitleToGame())
