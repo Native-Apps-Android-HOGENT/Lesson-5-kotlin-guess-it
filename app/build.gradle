@@ -95,4 +95,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
 
+    // Testing
+    testImplementation "junit:junit:$version_junit"
+    testImplementation "io.mockk:mockk:$version_mockk"
+    // To test coroutines with blocking
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+
 }
