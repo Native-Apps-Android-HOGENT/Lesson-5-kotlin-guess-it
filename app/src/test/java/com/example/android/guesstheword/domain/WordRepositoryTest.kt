@@ -32,13 +32,13 @@ class WordRepositoryTest {
         // Arrange
         every { networkInfo.isConnected } returns false
         every { connectivityManager.activeNetworkInfo } returns networkInfo
-        coEvery { wordDao.getAllWords() } returns listOf()
+        coEvery { wordDao.getWords() } returns listOf()
 
         // Act
         runBlockingTest {
             repository.getAllWords()
 
-            coVerify { wordDao.getAllWords() }
+            coVerify { wordDao.getWords() }
             coVerify { wordApiService.getWords() wasNot Called }
         }
     }
@@ -51,6 +51,7 @@ class WordRepositoryTest {
         val word = Word("test")
         coEvery { wordApiService.getWords() } returns listOf(word)
         coEvery { wordDao.insert(any()) } returns Unit
+        coEvery { wordDao.getWords() } returns listOf()
 
         // Act
         runBlockingTest {
@@ -68,6 +69,7 @@ class WordRepositoryTest {
         val word = Word("test")
         coEvery { wordApiService.getWords() } returns listOf(word)
         coEvery { wordDao.insert(any()) } returns Unit
+        coEvery { wordDao.getWords() } returns listOf()
 
         // Act
         runBlockingTest {

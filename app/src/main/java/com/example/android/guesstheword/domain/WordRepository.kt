@@ -12,12 +12,13 @@ class WordRepository(
 
     suspend fun getAllWords(): List<Word> {
         if (connectedToInternet()) {
-            val words = wordApiService.getWords()
+            val onlineWords = wordApiService.getWords()
+            val offlineWords = wordDao.getWords()
             // Save locally for future offline requests
-            saveInLocalDatabase(words)
-            return words
+            saveInLocalDatabase(onlineWords)
+            return onlineWords + offlineWords
         } else {
-            return wordDao.getAllWords()
+            return wordDao.getWords()
         }
     }
 

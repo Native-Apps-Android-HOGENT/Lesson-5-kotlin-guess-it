@@ -46,7 +46,7 @@ class WordDatabaseTest {
         val word = Word("Test", 1L)
         runBlocking{
             wordDao.insert(word)
-            val allWords = wordDao.getAllWords()
+            val allWords = wordDao.getWords()
             assertTrue(allWords.contains(word))
         }
     }

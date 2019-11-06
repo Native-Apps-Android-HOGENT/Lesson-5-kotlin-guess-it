@@ -14,5 +14,5 @@ interface WordDao {
     suspend fun insert(word: Word)
 
     @Query("SELECT * FROM word_table")
-    suspend fun getAllWords(): List<Word>
+    suspend fun getWords(): List<Word>
 }
