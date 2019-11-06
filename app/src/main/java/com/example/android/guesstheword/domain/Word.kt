@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Word(
         val word: String,
         @PrimaryKey(autoGenerate = true)
-        var nightId: Long = 0L
+        var id: Long = 0L
 )
