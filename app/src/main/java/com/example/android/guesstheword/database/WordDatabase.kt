@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-@Database(entities = [Word::class], version = 1, exportSchema = false)
+@Database(entities = [Word::class], version = 2, exportSchema = false)
 abstract class WordDatabase : RoomDatabase() {
     abstract val wordDao: WordDao
 

@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.android.guesstheword.domain.Word
-import com.example.android.guesstheword.util.getValueForTest
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -44,8 +44,10 @@ class WordDatabaseTest {
         // We have to specify the ID here or we can't test for object equality in assert due to
         // autoGeneration of the ID
         val word = Word("Test", 1L)
-        wordDao.insert(word)
-        val allWords = wordDao.getAllWords().getValueForTest()
-        assertTrue(allWords!!.contains(word))
+        runBlocking{
+            wordDao.insert(word)
+            val allWords = wordDao.getAllWords()
+            assertTrue(allWords.contains(word))
+        }
     }
 }
