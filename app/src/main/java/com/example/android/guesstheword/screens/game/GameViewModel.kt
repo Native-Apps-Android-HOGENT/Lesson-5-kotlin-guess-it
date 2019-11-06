@@ -97,6 +97,8 @@ class GameViewModel(private val wordRepository: WordRepository) : ViewModel() {
         get() = _eventBuzz
 
     init {
+        // Show an empty word while loading
+        _word.value = Word("")
         viewModelScope.launch {
             initialiseWords()
         }
