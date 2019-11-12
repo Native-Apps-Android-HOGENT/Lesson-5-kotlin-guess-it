@@ -41,8 +41,8 @@
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/title_text"
-            app:layout_constraintEnd_toEndOf="@+id/title_text"
-            app:layout_constraintStart_toStartOf="@+id/title_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -55,8 +55,8 @@
             android:textSize="34sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/txt_title_new_word"
-            app:layout_constraintEnd_toEndOf="@+id/txt_title_new_word"
-            app:layout_constraintStart_toStartOf="@+id/txt_title_new_word"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/get_ready_text" />
 
         <Button
@@ -65,11 +65,10 @@
             android:layout_height="wrap_content"
             android:text="@string/play_button"
             android:theme="@style/GoButton"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_words"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_title_add_word"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_title_add_word" />
 
         <EditText
             android:id="@+id/txt_title_new_word"
@@ -79,8 +78,8 @@
             android:hint="@string/hint_new_word"
             android:text="@={titleViewModel.newWord}"
             app:layout_constraintBottom_toTopOf="@+id/btn_title_add_word"
-            app:layout_constraintEnd_toEndOf="@+id/btn_title_add_word"
-            app:layout_constraintStart_toStartOf="@+id/btn_title_add_word"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text" />
 
         <Button
@@ -89,10 +88,23 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> titleViewModel.onAddNewWord()}"
             android:text="@string/add"
+            android:theme="@style/GoButton"
             app:layout_constraintBottom_toTopOf="@+id/play_game_button"
-            app:layout_constraintEnd_toEndOf="@+id/play_game_button"
-            app:layout_constraintStart_toStartOf="@+id/play_game_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_title_new_word" />
+
+        <Button
+            android:id="@+id/btn_words"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:theme="@style/GoButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/play_game_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

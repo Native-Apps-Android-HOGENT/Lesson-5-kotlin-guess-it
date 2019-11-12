@@ -51,9 +51,17 @@ class TitleFragment : Fragment() {
         binding.titleViewModel = ViewModelProviders.of(this, viewModelFactory).get(TitleViewModel::class.java)
         binding.lifecycleOwner = this
 
+        setListeners()
+        return binding.root
+    }
+
+    private fun setListeners() {
         binding.playGameButton.setOnClickListener {
             findNavController().navigate(TitleFragmentDirections.actionTitleToGame())
         }
-        return binding.root
+
+        binding.btnWords.setOnClickListener {
+            findNavController().navigate(TitleFragmentDirections.actionTitleToWordListFragment())
+        }
     }
 }
