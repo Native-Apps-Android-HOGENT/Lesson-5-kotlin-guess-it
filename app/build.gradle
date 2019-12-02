@@ -103,4 +103,9 @@ dependencies {
     // To test coroutines with blocking
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
 
+
+    // Koin for dependency injection
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
 }

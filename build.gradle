@@ -35,6 +35,8 @@ buildscript {
         version_junit = "4.12"
         version_mockk = "1.9.3"
         livedataVersion = '2.2.0-alpha01'
+
+        koin_version = "2.0.1"
     }
 
     repositories {
