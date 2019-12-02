@@ -16,21 +16,16 @@
 
 package com.example.android.guesstheword.screens.title
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.android.guesstheword.R
-import com.example.android.guesstheword.database.WordDatabase
 import com.example.android.guesstheword.databinding.TitleFragmentBinding
-import com.example.android.guesstheword.domain.WordRepository
-import com.example.android.guesstheword.network.WordApi
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Fragment for the starting or title screen of the app
@@ -38,17 +33,15 @@ import com.example.android.guesstheword.network.WordApi
 class TitleFragment : Fragment() {
 
     private lateinit var binding: TitleFragmentBinding
+
+    private val titleViewModel: TitleViewModel by viewModel()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.title_fragment, container, false)
 
-        val wordApiService = WordApi.retrofitService
-        val wordDao = WordDatabase.getInstance(requireContext()).wordDao
-        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        val viewModelFactory = TitleViewModelFactory(WordRepository(wordDao, wordApiService, connectivityManager))
-        binding.titleViewModel = ViewModelProviders.of(this, viewModelFactory).get(TitleViewModel::class.java)
+        binding.titleViewModel = titleViewModel
         binding.lifecycleOwner = this
 
         setListeners()

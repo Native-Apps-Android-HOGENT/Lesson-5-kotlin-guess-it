@@ -16,8 +16,6 @@
 
 package com.example.android.guesstheword.screens.game
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -29,21 +27,17 @@ import androidx.core.content.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
-import com.example.android.guesstheword.database.WordDatabase
 import com.example.android.guesstheword.databinding.GameFragmentBinding
-import com.example.android.guesstheword.domain.WordRepository
-import com.example.android.guesstheword.network.WordApi
-import com.example.android.guesstheword.screens.title.TitleViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Fragment where the game is played
  */
 class GameFragment : Fragment() {
 
-    private lateinit var viewModel: GameViewModel
+    private val viewModel: GameViewModel by viewModel()
 
     private lateinit var binding: GameFragmentBinding
 
@@ -57,14 +51,6 @@ class GameFragment : Fragment() {
                 container,
                 false
         )
-
-        // Get the viewmodel
-        val wordApiService = WordApi.retrofitService
-        val wordDao = WordDatabase.getInstance(requireContext()).wordDao
-        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        val viewModelFactory = GameViewModelFactory(WordRepository(wordDao, wordApiService, connectivityManager))
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
 
         // Set the viewmodel for databinding - this allows the bound layout access to all of the
         // data in the VieWModel
