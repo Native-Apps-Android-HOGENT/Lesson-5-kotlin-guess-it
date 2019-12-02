@@ -34,6 +34,7 @@
         android:roundIcon="@mipmap/ic_guess_it_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".MainApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <!-- Screen locked to landscape for easier play -->
         <!-- configChanges attribute makes the following actions NOT cause a config change  -->
