@@ -56,7 +56,6 @@ class GameViewModel : ViewModel() {
 
         // This is the total time of the game
         private const val COUNTDOWN_TIME = 60000L
-
     }
 
     private val timer: CountDownTimer
@@ -74,7 +73,6 @@ class GameViewModel : ViewModel() {
     private val _word = MutableLiveData<String>()
     val word: LiveData<String>
         get() = _word
-
 
     // The current score
     private val _score = MutableLiveData<Int>()
@@ -153,7 +151,7 @@ class GameViewModel : ViewModel() {
      * Moves to the next word in the list
      */
     private fun nextWord() {
-        //Select and remove a word from the list
+        // Select and remove a word from the list
         if (wordList.isEmpty()) {
             resetList()
         }

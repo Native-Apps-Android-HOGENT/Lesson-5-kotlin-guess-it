@@ -41,8 +41,11 @@ class GameFragment : Fragment() {
 
     private lateinit var binding: GameFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
@@ -82,7 +85,6 @@ class GameFragment : Fragment() {
         })
 
         return binding.root
-
     }
 
     /**
@@ -95,7 +97,7 @@ class GameFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 buzzer.vibrate(VibrationEffect.createWaveform(pattern, -1))
             } else {
-                //deprecated in API 26
+                // deprecated in API 26
                 buzzer.vibrate(pattern, -1)
             }
         }
