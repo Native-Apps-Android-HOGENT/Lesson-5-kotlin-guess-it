@@ -38,9 +38,9 @@ class ScoreFragment : Fragment() {
     private lateinit var viewModelFactory: ScoreViewModelFactory
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
 
         // Inflate view and obtain an instance of the binding class.
@@ -62,6 +62,12 @@ class ScoreFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
+        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         // Navigates back to title when button is pressed
         viewModel.eventPlayAgain.observe(this, Observer { playAgain ->
             if (playAgain) {
@@ -69,7 +75,5 @@ class ScoreFragment : Fragment() {
                 viewModel.onPlayAgainComplete()
             }
         })
-
-        return binding.root
     }
 }

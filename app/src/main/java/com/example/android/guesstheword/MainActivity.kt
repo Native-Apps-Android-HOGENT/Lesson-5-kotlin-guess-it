@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 /**
- * Creates an Activity that hosts all of the fragments in the app
+ * Activity that will host all fragments in this app
  */
 class MainActivity : AppCompatActivity() {
 

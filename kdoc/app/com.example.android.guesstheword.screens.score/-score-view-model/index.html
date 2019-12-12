@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ScoreViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.example.android.guesstheword.screens.score</a>&nbsp;/&nbsp;<a href="./index.html">ScoreViewModel</a><br/>
+<br/>
+<h1>ScoreViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">ScoreViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewModel</span></code>
+<p>ViewModel for the final screen showing the score</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>ViewModel for the final screen showing the score</p>
+<code><span class="identifier">ScoreViewModel</span><span class="symbol">(</span><span class="identifier" id="com.example.android.guesstheword.screens.score.ScoreViewModel$<init>(kotlin.Int)/finalScore">finalScore</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="event-play-again.html">eventPlayAgain</a></h4>
+</td>
+<td>
+<p>Updates to true when the user wants to play again, and thus navigate to the Game screen.</p>
+<code><span class="keyword">val </span><span class="identifier">eventPlayAgain</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="score.html">score</a></h4>
+</td>
+<td>
+<p>The users final score</p>
+<code><span class="keyword">val </span><span class="identifier">score</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="on-play-again.html">onPlayAgain</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onPlayAgain</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-play-again-complete.html">onPlayAgainComplete</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onPlayAgainComplete</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

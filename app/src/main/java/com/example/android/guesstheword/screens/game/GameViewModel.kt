@@ -33,8 +33,10 @@ private val NO_BUZZ_PATTERN = longArrayOf(0)
  */
 class GameViewModel : ViewModel() {
 
-    // These are the three different types of buzzing in the game. Buzz pattern is the number of
-    // milliseconds each interval of buzzing and non-buzzing takes.
+    /**
+     * These are the three different types of buzzing in the game.
+     * @param pattern the number of milliseconds each interval of buzzing and non-buzzing takes.
+     */
     enum class BuzzType(val pattern: LongArray) {
         CORRECT(CORRECT_BUZZ_PATTERN),
         GAME_OVER(GAME_OVER_BUZZ_PATTERN),
@@ -64,7 +66,9 @@ class GameViewModel : ViewModel() {
     val currentTime: LiveData<Long>
         get() = _currentTime
 
-    // The String version of the current time
+    /**
+     * A string representation of the current time left to play
+     */
     val currentTimeString: LiveData<String> = Transformations.map(currentTime) { time ->
         DateUtils.formatElapsedTime(time)
     }
@@ -74,21 +78,27 @@ class GameViewModel : ViewModel() {
     val word: LiveData<String>
         get() = _word
 
-    // The current score
     private val _score = MutableLiveData<Int>()
+    /**
+     * The players current score
+     */
     val score: LiveData<Int>
         get() = _score
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
 
-    // Event which triggers the end of the game
     private val _eventGameFinish = MutableLiveData<Boolean>()
+    /**
+     * Event which triggers the end of the game
+     */
     val eventGameFinish: LiveData<Boolean>
         get() = _eventGameFinish
 
-    // Event that triggers the phone to buzz using different patterns, determined by BuzzType
     private val _eventBuzz = MutableLiveData<BuzzType>()
+    /**
+     * Event that triggers the phone to buzz using different patterns, determined by BuzzType
+     */
     val eventBuzz: LiveData<BuzzType>
         get() = _eventBuzz
 

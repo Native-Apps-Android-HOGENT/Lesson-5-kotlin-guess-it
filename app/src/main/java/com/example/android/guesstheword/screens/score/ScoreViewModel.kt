@@ -26,10 +26,16 @@ import androidx.lifecycle.ViewModel
 class ScoreViewModel(finalScore: Int) : ViewModel() {
 
     private val _eventPlayAgain = MutableLiveData<Boolean>()
+    /**
+     * Updates to true when the user wants to play again, and thus navigate to the Game screen.
+     */
     val eventPlayAgain: LiveData<Boolean>
         get() = _eventPlayAgain
 
     private val _score = MutableLiveData<Int>()
+    /**
+     * The users final score
+     */
     val score: LiveData<Int>
         get() = _score
 
